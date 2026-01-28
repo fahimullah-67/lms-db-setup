@@ -1,0 +1,22 @@
+{
+  "name": "lms-db-setup",
+  "version": "1.0.0",
+  "main": "setupDatabase.js",
+  "type": "module",
+  "scripts": {
+    "start": "node setupDatabase.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "node-appwrite": "^21.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
