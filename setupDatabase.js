@@ -169,23 +169,65 @@ async function setupDatabase() {
   /* -------------------- ASSIGNMENTS -------------------- */
   await safeCreate(
     () =>
-      databases.createCollection(
-        DATABASE_ID,
-        'assignments',
-        'Assignments',
-        [Permission.read(Role.users())]
-      ),
-    'Assignments collection'
-  )
+      databases.createCollection(DATABASE_ID, "assignments", "Assignments", [
+        Permission.read(Role.users()),
+        Permission.create(Role.users()),
+        Permission.update(Role.users()),
+        Permission.delete(Role.users()),
+      ]),
+    "Assignments collection",
+  );
 
   await safeCreate(() =>
     databases.createStringAttribute(DATABASE_ID, 'assignments', 'title', 255, true),
     'assignments.title'
   )
-  await safeCreate(() =>
-    databases.createStringAttribute(DATABASE_ID, 'assignments', 'courseId', 50, true),
-    'assignments.courseId'
-  )
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
+        "description",
+        5000,
+        true,
+      ),
+    "assignments.description",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
+        "instruction",
+        5000,
+        true,
+      ),
+    "assignments.instruction",
+  );
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
+        "totalMarks",
+        4,
+        true,
+      ),
+    "assignments.totalMarks",
+  );
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
+        "courseId",
+        50,
+        true,
+      ),
+    "assignments.courseId",
+  );
   await safeCreate(() =>
     databases.createDatetimeAttribute(DATABASE_ID, 'assignments', 'dueDate', true),
     'assignments.dueDate'
