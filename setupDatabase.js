@@ -205,43 +205,79 @@ async function setupDatabase() {
   );
   await safeCreate(
     () =>
-      databases.createDatetimeAttribute(
+      databases.createStringAttribute(
         DATABASE_ID,
         "lectures",
         "description",
+        5000,
         false,
       ),
     "lectures.description",
   );
   await safeCreate(
     () =>
-      databases.createDatetimeAttribute(
+      databases.createStringAttribute(
         DATABASE_ID,
         "lectures",
         "videoUrl",
+        255,
         false,
       ),
     "lectures.videoUrl",
   );
+
   await safeCreate(
     () =>
-      databases.createDatetimeAttribute(
+      databases.createStringAttribute(
         DATABASE_ID,
         "lectures",
         "fileId",
+        50,
         false,
       ),
     "lectures.fileId",
   );
   await safeCreate(
     () =>
-      databases.createDatetimeAttribute(
+      databases.createStringAttribute(
         DATABASE_ID,
         "lectures",
         "fileName",
+        255,
         false,
       ),
     "lectures.fileName",
+  );
+
+  // await databases.deleteAttribute(DATABASE_ID, "lectures", "duration");
+
+  // await safeCreate(
+  //   async () =>
+  //     await databases.deleteAttribute(DATABASE_ID, "lectures", "duration"),
+  //   "lectures.duration (delete old)",
+  // );
+
+  await safeCreate(
+    async () =>
+      await databases.createStringAttribute(
+        DATABASE_ID,
+        "lectures",
+        "duration",
+        60,
+        true,
+      ),
+    "lectures.duration",
+  );
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "lectures",
+        "materials",
+        5000,
+        false,
+      ),
+    "lectures.materials",
   );
 
   await safeCreate(
