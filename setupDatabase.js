@@ -275,7 +275,7 @@ async function setupDatabase() {
         "lectures",
         "materials",
         5000,
-        false,
+        true,
       ),
     "lectures.materials",
   );
