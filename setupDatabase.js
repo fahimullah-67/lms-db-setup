@@ -64,6 +64,19 @@ async function setupDatabase() {
       databases.createStringAttribute(DATABASE_ID, "users", "role", 50, true),
     "users.role",
   );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "users",
+        "enrolledCourses",
+        500,
+        true,
+      ),
+    "users.enrolledCourses",
+  );
+
   await safeCreate(
     () =>
       databases.createStringAttribute(DATABASE_ID, "users", "phone", 20, false),
@@ -333,6 +346,30 @@ async function setupDatabase() {
       databases.createStringAttribute(
         DATABASE_ID,
         "assignments",
+        "resources",
+        5000,
+        true,
+      ),
+    "assignments.resources",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
+        "status",
+        5000,
+        true,
+      ),
+    "assignments.status",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "assignments",
         "instruction",
         5000,
         true,
@@ -503,10 +540,120 @@ async function setupDatabase() {
     "announcements.courseId index",
   );
 
+  /* -------------------- Submissions-------------------- */
+  await safeCreate(
+    () =>
+      databases.createCollection(DATABASE_ID, "submissions", "Submissions", [
+        Permission.read(Role.users()),
+        Permission.create(Role.users()),
+        Permission.update(Role.users()),
+        Permission.delete(Role.users()),
+      ]),
+    "Submissions collection",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "assignmentId",
+        55,
+        true,
+      ),
+    "submissions.assignmentId",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "studentId",
+        55,
+        true,
+      ),
+    "submissions.studentId",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "studentName",
+        55,
+        true,
+      ),
+    "submissions.studentName",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "submissionUrl",
+        55,
+        false,
+        Array,
+      ),
+    "submissions.submissionUrl",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "submittedAt",
+        55,
+        false,
+      ),
+    "submissions.submittedAt",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createIntegerAttribute(
+        DATABASE_ID,
+        "submissions",
+        "marks",
+        false,
+        0,
+        100,
+        0,
+      ),
+    "submissions.marks",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "feedback",
+        255,
+        false,
+      ),
+    "submissions.feedback",
+  );
+
+  await safeCreate(
+    () =>
+      databases.createStringAttribute(
+        DATABASE_ID,
+        "submissions",
+        "status",
+        55,
+        false,
+        "pending",
+      ),
+    "submissions.status",
+  );
+
   console.log("\n🎉 Database setup completed successfully!\n");
 }
-
-
 
 
 /* -------------------- Run -------------------- */
